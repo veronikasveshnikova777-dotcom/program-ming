@@ -27,6 +27,7 @@ class DesktopPet:
         self.turning = False
         self.hugging = False
         self.eating_sprite_index = 0
+        self.hugging_frame_counter = 0  # Сброс счетчика
         self.move_speed = 2
         self.move_delay = 50
         # Восстанавливаем видимость Susie после обнимания
@@ -54,6 +55,8 @@ class DesktopPet:
 
         self.eating_sprites = []
         self.eating_sprite_index = 0
+        self.hugging_frame_counter = 0  # Счетчик для контроля частоты смены кадров обнимания
+        
         if title == "Susie":  # Only for Susie pet
             try:
                 # Load all 4 eating sprites
@@ -191,7 +194,7 @@ class DesktopPet:
                     for hug_file in hug_files:
                         hug_path = os.path.join(hug_folder, hug_file)
                         hug_image = Image.open(hug_path)
-                        hug_image = hug_image.resize((160, 160), Image.Resampling.LANCZOS)
+                        hug_image = hug_image.resize((150, 150), Image.Resampling.LANCZOS)
                         if hug_image.mode != 'RGBA':
                             hug_image = hug_image.convert('RGBA')
                         self.hugging_sprites.append(ImageTk.PhotoImage(hug_image))
@@ -497,7 +500,7 @@ class DesktopPet:
         # Делаем Susie прозрачной
         if self.linked_pet and self.linked_pet.title == "Susie":
             self.linked_pet.window.attributes('-alpha', 0.0)
-        self.window.after(5000, self.reset_action)
+        self.window.after(4000, self.reset_action)
 
     def on_drag(self, event):
         x = self.window.winfo_x() + event.x - self.x
@@ -526,7 +529,11 @@ class DesktopPet:
             self.label.configure(image=self.turning_sprite)
             self.label.image = self.turning_sprite
         elif self.hugging and self.hugging_sprites:
-            self.hugging_sprite_index = (self.hugging_sprite_index + 1) % len(self.hugging_sprites)
+            # Меняем спрайт каждые 5 вызовов animate (5 * 200ms = 1000ms = 1 секунда)
+            self.hugging_frame_counter += 1
+            if self.hugging_frame_counter >= 5:
+                self.hugging_sprite_index = (self.hugging_sprite_index + 1) % len(self.hugging_sprites)
+                self.hugging_frame_counter = 0
             current_hugging_sprite = self.hugging_sprites[self.hugging_sprite_index]
             self.label.configure(image=current_hugging_sprite)
             self.label.image = current_hugging_sprite
