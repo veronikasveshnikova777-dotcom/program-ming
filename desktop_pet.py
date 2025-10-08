@@ -21,6 +21,8 @@ class DesktopPet:
         self.wiggling = False
         self.pirouetting = False
         self.becoming_dog = False
+        self.hanging = False
+        self.peacing = False
         self.eating_sprite_index = 0
         self.move_speed = 2
         self.move_delay = 50
@@ -81,7 +83,7 @@ class DesktopPet:
         if title == "Susie":  # Only for Susie pet
             try:
                 become_dog_image = Image.open('susie_become_dog.png')
-                become_dog_image = become_dog_image.resize((128, 128), Image.Resampling.LANCZOS)
+                become_dog_image = become_dog_image.resize((110, 110), Image.Resampling.LANCZOS)
                 if become_dog_image.mode != 'RGBA':
                     become_dog_image = become_dog_image.convert('RGBA')
                 self.becoming_dog_sprite = ImageTk.PhotoImage(become_dog_image)
@@ -90,7 +92,7 @@ class DesktopPet:
         if title == "Kris":  # Only for Kris pet
             try:
                 become_dog_image = Image.open('kris_become_dog.png')
-                become_dog_image = become_dog_image.resize((128, 128), Image.Resampling.LANCZOS)
+                become_dog_image = become_dog_image.resize((110, 110), Image.Resampling.LANCZOS)
                 if become_dog_image.mode != 'RGBA':
                     become_dog_image = become_dog_image.convert('RGBA')
                 self.becoming_dog_sprite = ImageTk.PhotoImage(become_dog_image)
@@ -103,7 +105,7 @@ class DesktopPet:
         if title == "Kris":  # Only for Kris pet
             try:
                 sit_image = Image.open('kris_sit.png')
-                sit_image = sit_image.resize((128, 128), Image.Resampling.LANCZOS)
+                sit_image = sit_image.resize((110, 110), Image.Resampling.LANCZOS)
                 if sit_image.mode != 'RGBA':
                     sit_image = sit_image.convert('RGBA')
                 self.sitting_sprite = ImageTk.PhotoImage(sit_image)
@@ -147,8 +149,30 @@ class DesktopPet:
                 print(f"Wiggle sprites not found: {e}, using default sprites")
 
 
-        
-        
+        self.hanging_sprites = []
+        self.hanging_sprite_index = 0
+        if title == "Kris":
+            try:
+                for i in range(1, 4):
+                    hang_image = Image.open(f'kris_hang/kris_hang{i}.png')
+                    hang_image = hang_image.resize((128, 128), Image.Resampling.LANCZOS)
+                    if hang_image.mode != 'RGBA':
+                        hang_image = hang_image.convert('RGBA')
+                    self.hanging_sprites.append(ImageTk.PhotoImage(hang_image))
+            except FileNotFoundError as e:
+                print(f"Hanging sprites not found: {e}, using default sprites")
+
+        self.peacing_sprite = None
+        if title == "Kris":
+            try:
+                peace_image = Image.open('kris_peace.png')
+                peace_image = peace_image.resize((128, 128), Image.Resampling.LANCZOS)
+                if peace_image.mode != 'RGBA':
+                    peace_image = peace_image.convert('RGBA')
+                self.peacing_sprite = ImageTk.PhotoImage(peace_image)
+            except FileNotFoundError:
+                print("kris_peace.png not found, using default sprites")
+
         self.label = tk.Label(window, image=self.sprites[0], bg='black', bd=0)
         self.label.pack()
         # Initialize variables
@@ -164,6 +188,8 @@ class DesktopPet:
         self.pirouetting = False
         self.wiggling = False
         self.becoming_dog = False
+        self.hanging = False
+        self.peacing = False
          # Movement speed and delay
         self.move_speed = 2
         self.move_delay = 50
@@ -193,7 +219,7 @@ class DesktopPet:
     
     def start_drag(self, event):
         self.moving = False
-        self.sitting = True
+        self.hanging = True
         self.x = event.x
         self.y = event.y
        
@@ -210,7 +236,7 @@ class DesktopPet:
         if self.title == "Kris":
             menu.add_command(label="Сделать пируэт", command=self.pirouette)
             menu.add_command(label="Дрыгаться", command=self.wiggle)
-        
+            menu.add_command(label="Показать мир", command=self.peace)
         menu.add_separator()
         
        
@@ -329,16 +355,46 @@ class DesktopPet:
         self.move_speed = 0 
         self.window.after(20000, self.reset_action)
 
-       
+    def hang(self):
+        print("Питомец висит!")
+        self.moving = False
+        self.dancing = False
+        self.running = False
+        self.sitting = False
+        self.posing = False
+        self.eating = False
+        self.pirouetting = False 
+        self.wiggling = False
+        self.becoming_dog = False
+        self.hanging = True
+        self.move_speed = 0 
+        self.window.after(10000, self.reset_action)
+
+    def peace(self):
+        print("Питомец показывает мир!")
+        self.moving = False
+        self.dancing = False
+        self.running = False
+        self.sitting = False
+        self.posing = False
+        self.eating = False
+        self.pirouetting = False 
+        self.wiggling = False
+        self.becoming_dog = False
+        self.hanging = False
+        self.peacing = True
+        self.move_speed = 0 
+        self.window.after(10000, self.reset_action)
+
     def on_drag(self, event):
         x = self.window.winfo_x() + event.x - self.x
         y = self.window.winfo_y() + event.y - self.y
         self.window.geometry(f'+{x}+{y}')
-        self.sitting = True  
+        self.hanging = True  
         
     def end_drag(self, event):
-        self.sitting = False
-        
+        self.hanging = False
+
     def quit_program(self):
         self.window.quit()
     
@@ -350,6 +406,9 @@ class DesktopPet:
         elif self.becoming_dog and self.becoming_dog_sprite:
             self.label.configure(image=self.becoming_dog_sprite)
             self.label.image = self.becoming_dog_sprite
+        elif self.peacing and self.peacing_sprite:
+            self.label.configure(image=self.peacing_sprite)
+            self.label.image = self.peacing_sprite
         elif self.eating and self.eating_sprites:
             # Animate eating with all 4 sprites
             self.eating_sprite_index = (self.eating_sprite_index + 1) % len(self.eating_sprites)
@@ -370,6 +429,11 @@ class DesktopPet:
             current_wiggling_sprite = self.wiggling_sprites[self.wiggling_sprite_index]
             self.label.configure(image=current_wiggling_sprite)
             self.label.image = current_wiggling_sprite
+        elif self.hanging and self.hanging_sprites:
+            self.hanging_sprite_index = (self.hanging_sprite_index + 1) % len(self.hanging_sprites)
+            current_hanging_sprite = self.hanging_sprites[self.hanging_sprite_index]
+            self.label.configure(image=current_hanging_sprite)
+            self.label.image = current_hanging_sprite
         
         else:
             # Switch between sprites
@@ -394,7 +458,7 @@ class DesktopPet:
     def move(self):
         if not self.moving:
             # Randomly decide to start moving (если не сидит)
-            if not self.running and not self.dancing and not self.sitting and not self.eating and not self.posing and not self.pirouetting and not self.wiggling and not self.becoming_dog:
+            if not self.running and not self.dancing and not self.sitting and not self.eating and not self.posing and not self.pirouetting and not self.wiggling and not self.becoming_dog and not self.hanging:
                 self.moving = random.random() < 0.3
                 if self.moving:
                     self.direction = random.choice([-1, 1])
