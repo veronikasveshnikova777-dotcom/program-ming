@@ -7,12 +7,14 @@ import pygame
 import ctypes
 from ctypes import wintypes
 import shutil
+from pynput import mouse
 
 pygame.mixer.init()
 
 class DesktopPet:
     def reset_action(self):
         self.moving = False
+        self.pointing = False
         self.running = False
         self.dancing = False
         self.sitting = False
@@ -26,6 +28,7 @@ class DesktopPet:
         self.healing = False
         self.turning = False
         self.hugging = False
+        self.bowing = False
         self.eating_sprite_index = 0
         self.hugging_frame_counter = 0  # Сброс счетчика
         self.move_speed = 2
@@ -201,6 +204,19 @@ class DesktopPet:
             except FileNotFoundError as e:
                 print(f"Ошибка загрузки спрайтов обнимания: {e}")
 
+        self.bowing_sprite = None
+        if title == "Kris":
+            try:
+                bow_image = Image.open('kris_bow.png')
+                bow_image = bow_image.resize((128, 128), Image.Resampling.LANCZOS)
+                if bow_image.mode != 'RGBA':
+                    bow_image = bow_image.convert('RGBA')
+                self.bowing_sprite = ImageTk.PhotoImage(bow_image)
+            except FileNotFoundError:
+                print("kris_bow.png not found, using default sprites")
+
+
+
 
         self.healing_sprites = []
         self.healing_sprite_index = 0
@@ -226,13 +242,25 @@ class DesktopPet:
             except FileNotFoundError:
                 print("susie_turn.png not found, using default sprites")
 
+        self.pointing_sprite = None
+        if title == "Susie":
+            try:
+                point_image = Image.open('susie_point.png')
+                point_image = point_image.resize((140, 140), Image.Resampling.LANCZOS)
+                if point_image.mode != 'RGBA':
+                    point_image = point_image.convert('RGBA')
+                self.pointing_sprite = ImageTk.PhotoImage(point_image)
+            except FileNotFoundError:
+                print("susie_point.png not found, using default sprites")
+
         self.label = tk.Label(window, image=self.sprites[0], bg='black', bd=0)
         self.label.pack()
         # Initialize variables
         self.current_sprite = 0
         self.eating_sprite_index = 0
         self.moving = False
-        self.direction = 1  # 1 for right, -1 for left
+        self.direction = 1
+        self.pointing = False  
         self.running = False
         self.dancing = False
         self.sitting = False
@@ -246,6 +274,7 @@ class DesktopPet:
         self.healing = False
         self.turning = False
         self.hugging = False
+        self.bowing = False
          # Movement speed and delay
         self.move_speed = 2
         self.move_delay = 50
@@ -265,6 +294,14 @@ class DesktopPet:
         self.label.bind('<ButtonRelease-1>', self.end_drag)
         self.label.bind('<Button-3>', self.show_menu)
         
+        # Для Susie - запускаем глобальный слушатель средней кнопки мыши
+        if title == "Susie":
+            def on_click(x, y, button, pressed):
+                if button == mouse.Button.middle and pressed:
+                    self.point()
+            
+            self.mouse_listener = mouse.Listener(on_click=on_click)
+            self.mouse_listener.start()
        
         # Make window focusable for keyboard events
         self.window.focus_set()
@@ -296,6 +333,7 @@ class DesktopPet:
             menu.add_command(label="Дрыгаться", command=self.wiggle)
             menu.add_command(label="Показать мир", command=self.peace)
             menu.add_command(label="Обнять", command=self.hug)
+            menu.add_command(label="Поклониться", command=self.bow)
         menu.add_separator()
         
        
@@ -305,6 +343,48 @@ class DesktopPet:
         x = self.window.winfo_x() + event.x
         y = self.window.winfo_y() + event.y - 40  # чуть выше
         menu.tk_popup(x, y)
+
+    
+    def bow(self):
+        print("Питомец показывает на вас!")
+        self.moving = False
+        self.dancing = False
+        self.running = False
+        self.sitting = False
+        self.posing = False
+        self.eating = False
+        self.pirouetting = False
+        self.wiggling = False
+        self.becoming_dog = False
+        self.hanging = False
+        self.peacing = False
+        self.healing = False
+        self.turning = False
+        self.hugging = False
+        self.pointing = False
+        self.bowing = True
+        self.move_speed = 0
+        self.window.after(2000, self.reset_action)
+
+    def point(self):
+        print("Питомец показывает на вас!")
+        self.moving = False
+        self.dancing = False
+        self.running = False
+        self.sitting = False
+        self.posing = False
+        self.eating = False
+        self.pirouetting = False
+        self.wiggling = False
+        self.becoming_dog = False
+        self.hanging = False
+        self.peacing = False
+        self.healing = False
+        self.turning = False
+        self.hugging = False
+        self.pointing = True
+        self.move_speed = 0
+        self.window.after(2000, self.reset_action)
 
     def sit(self):
         print("Питомец сел!")
@@ -512,6 +592,9 @@ class DesktopPet:
         self.hanging = False
 
     def quit_program(self):
+        # Останавливаем слушатель мыши для Susie
+        if self.title == "Susie" and hasattr(self, 'mouse_listener'):
+            self.mouse_listener.stop()
         self.window.quit()
     
     def animate(self):
@@ -519,6 +602,12 @@ class DesktopPet:
         if self.sitting and self.sitting_sprite:
             self.label.configure(image=self.sitting_sprite)
             self.label.image = self.sitting_sprite
+        elif self.pointing and self.pointing_sprite:
+            self.label.configure(image=self.pointing_sprite)
+            self.label.image = self.pointing_sprite
+        elif self.bowing and self.bowing_sprite:
+            self.label.configure(image=self.bowing_sprite)
+            self.label.image = self.bowing_sprite
         elif self.becoming_dog and self.becoming_dog_sprite:
             self.label.configure(image=self.becoming_dog_sprite)
             self.label.image = self.becoming_dog_sprite
@@ -591,7 +680,7 @@ class DesktopPet:
     def move(self):
         if not self.moving:
             # Randomly decide to start moving (если не сидит)
-            if not self.running and not self.dancing and not self.sitting and not self.eating and not self.posing and not self.pirouetting and not self.wiggling and not self.becoming_dog and not self.hanging and not self.healing and not self.turning and not self.hugging:
+            if not self.running and not self.dancing and not self.sitting and not self.eating and not self.posing and not self.pirouetting and not self.wiggling and not self.becoming_dog and not self.hanging and not self.healing and not self.turning and not self.hugging and not self.pointing and not self.bowing:
                 self.moving = random.random() < 0.3
                 if self.moving:
                     self.direction = random.choice([-1, 1])
