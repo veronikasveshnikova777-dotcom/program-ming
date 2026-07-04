@@ -57,6 +57,23 @@ button {color: rgb(255, 255, 255);  background-color: #23CED9;}
     -4px 4px 0 #000,
     4px 4px 0 #000;  
     ;
-    font-size: 90px
+    font-size: 90px;
+    letter-spacing: 2px;
+
+}
+.yellow-text-outline {
+    color: rgb(255, 255, 91);
+     text-shadow:
+    -2px -2px 0 #000,
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+    2px 2px 0 #000;  
+    ;
+    font-size: 45px;
+    line-height: 35px;
+    text-align: center;
+    letter-spacing: 0,5px;
+    position: relative;
+    
 
 }
