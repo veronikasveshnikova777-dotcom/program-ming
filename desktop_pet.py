@@ -1,5 +1,6 @@
 import tkinter as tk
 from turtle import title
+import PIL
 from PIL import Image, ImageTk
 import random
 import os

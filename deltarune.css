@@ -77,3 +77,27 @@ button {color: rgb(255, 255, 255);  background-color: #23CED9;}
     
 
 }
+
+.animation {
+  animation: myAnimation 1s ease-out infinite;
+     position: relative;
+     margin: 90px;
+     margin-left: 140px;
+     
+  
+}
+
+@keyframes myAnimation {
+  0%   {background-image: url("kris_heart/kris_heart0.png"); width: 183px; height: 128px}
+  11%  {background-image: url("kris_heart/kris_heart1.png"); width: 183px; height: 128px}
+  22%  {background-image: url("kris_heart/kris_heart2.png"); width: 183px; height: 128px}
+  33%  {background-image: url("kris_heart/kris_heart3.png"); width: 183px; height: 128px}
+  44% {background-image: url("kris_heart/kris_heart4.png"); width: 183px; height: 128px}
+  55% {background-image: url("kris_heart/kris_heart5.png"); width: 183px; height: 128px}
+  66% {background-image: url("kris_heart/kris_heart6.png"); width: 183px; height: 128px}
+  77% {background-image: url("kris_heart/kris_heart7.png"); width: 183px; height: 128px}
+  88% {background-image: url("kris_heart/kris_heart8.png"); width: 183px; height: 128px}
+  100% {background-image: url("kris_heart/kris_heart0.png"); width: 183px; height: 128px}
+}
+
+
