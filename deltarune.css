@@ -80,7 +80,7 @@ button {color: rgb(255, 255, 255);  background-color: #23CED9;}
 
 .animation {
   animation: myAnimation 1s ease-out infinite;
-     position: relative;
+     position: absolute;
      margin: px;
      margin-left: px;
      
@@ -88,16 +88,19 @@ button {color: rgb(255, 255, 255);  background-color: #23CED9;}
 }
 
 @keyframes myAnimation {
-  0%   { background-image: url("kris_heart/kris_heart0.png"); width: 528px; height: 472px; border: 0px}
-  11%  {background-image: url("kris_heart/kris_heart1.png"); width: 528px; height: 472px;border: 0px}
-  22%  {background-image: url("kris_heart/kris_heart2.png"); width: 528px; height: 472px;border: 0px}
-  33%  {background-image: url("kris_heart/kris_heart3.png"); width: 528px; height: 472px;border: 0px}
-  44% {background-image: url("kris_heart/kris_heart4.png"); width: 528px; height: 472px;border: 0px}
-  55% {background-image: url("kris_heart/kris_heart5.png"); width: 528px; height: 472px;border: 0px}
-  66% {background-image: url("kris_heart/kris_heart6.png"); width: 528px; height: 472px;border: 0px}
-  77% {background-image: url("kris_heart/kris_heart7.png"); width: 528px; height: 472px;border: 0px}
-  88% {background-image: url("kris_heart/kris_heart8.png"); width: 528px; height: 472px;border: 0px}
-  100% {background-image: url("kris_heart/kris_heart0.png"); width: 528px; height: 472px;border: 0px}
+  0%   { background-image: url("kris_flirt0.png"); width: 528px; height: 360px; border: 0px}
+  11%  {background-image: url("kris_flirt1.png"); width: 528px; height: 360px;border: 0px}
+  22%  {background-image: url("kris_flirt2.png"); width: 528px; height: 360px;border: 0px}
+  33%  {background-image: url("kris_flirt3.png"); width: 528px; height: 360px;border: 0px}
+  44% {background-image: url("kris_flirt4.png"); width: 528px; height: 360px;border: 0px}
+  55% {background-image: url("kris_flirt5.png"); width: 528px; height: 360px;border: 0px}
+  66% {background-image: url("kris_flirt6.png"); width: 528px; height: 360px;border: 0px}
+  77% {background-image: url("kris_flirt7.png"); width: 528px; height: 360px;border: 0px}
+  88% {background-image: url("kris_flirt8.png"); width: 528px; height: 360px;border: 0px}
+  100% {background-image: url("kris_flirt0.png"); width: 528px; height: 360px;border: 0px}
 }
 
-
+.chibi {
+    width: 100px;
+    height:100px
+}
