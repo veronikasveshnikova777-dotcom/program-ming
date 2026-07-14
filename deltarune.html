@@ -29,8 +29,8 @@
       grid-template-columns: 30% 20% 18% 17% 15%;
       /* Scaled row heights totaling 100%: Yellow, Green, Red-row-1, Red-row-2, Red-row-3, Red-row-4 */
       grid-template-rows: 10% 6% 15% 47% 7% 15%;
-      gap: 3px;
-      background-color: #000000;
+      gap: 0px;
+      background-color:;
       border: 3px solid #000000;
       width: 95vw;
       height: 63vw;
@@ -39,21 +39,25 @@
     }
 
     .grid-cell {
-      background-color: #ffffff;
+      background-color:
     }
 
     /* Colors defined by the reference diagram */
     .color-yellow {
-      background-color: #ffff00;
+      background-color: ;
     }
-    .color-green {
-      background-color: #00ff00;
+    .color-pink {
+      background-color: rgb(255, 52, 167);
+       mix-blend-mode: screen;
+    inset: 0;
+  z-index: -1;
+  opacity: 0.5;
     }
     .color-red {
-      background-color: #ff0000;
+      background-color:
     }
     .color-blue {
-      background-color: #00ccff;
+      background-color: ;
     }
 
     /* Row 1 (Yellow) */
@@ -66,14 +70,17 @@
     .cell-2-green-left {
       grid-column: 1 / 2;
       grid-row: 2 / 3;
+     
     }
     .cell-2-green-mid {
       grid-column: 2 / 5;
       grid-row: 2 / 3;
+      
     }
     .cell-2-green-right {
       grid-column: 5 / 6;
       grid-row: 2 / 3;
+     
     }
 
     /* Row 3 (Red & Blue) */
@@ -130,7 +137,7 @@
       display: flex;
       flex-direction: column;
       gap: 3px;
-      background-color: #000000;
+      background-color:;
       height: 150%;
     }
 
@@ -147,15 +154,23 @@
     <div class="grid-cell cell-1-yellow color-yellow"></div>
 
     <!-- Row 2 (Green) -->
-    <div class="grid-cell cell-2-green-left color-green">Undertale Page</div>
-    <div class="grid-cell cell-2-green-mid color-green"></div>
-    <div class="grid-cell cell-2-green-right color-green"></div>
+    <div class="grid-cell cell-2-green-left color-pink">
+      <a href="https://www.sosasou.cz/">
+        <span class="page-link">
+                     Undertale Page
+          
+        </span>
+      </a>
+    </div>
+    <div class="grid-cell cell-2-green-mid color-pink"></div>
+    <div class="grid-cell cell-2-green-right color-pink"></div>
+
 
     <!-- Row 3 (Red/Blue) -->
     <div class="grid-cell cell-3-red-left color-red">
         <a href="https://www.sosasou.cz/">
-                    <span>
-                        <button> OFFICIAL WEB</button>
+                    <span class="idk">
+                        <button class="buttons"> OFFICIAL WEB</button>
                     </span>
                 </a>
 
@@ -164,7 +179,7 @@
     <div class="grid-cell cell-3-red-right color-red">
         <a href="https://www.sosasou.cz/">
                     <span>
-                        <button>STEAM</button>
+                        <button class="buttons">STEAM</button>
                     </span>
                 </a>
     </div>
