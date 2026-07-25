@@ -35,7 +35,7 @@ body {
     background-image: url('https://images.steamusercontent.com/ugc/12499624586055457477/F051EBF684F61C755339560381568A09F85A7BE7/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true');
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center center;
+    background-position: center;
     height: 100vh;
     margin: 0;
     font-family: "Determination";
@@ -43,12 +43,29 @@ body {
 }
 a {color: azure}
 
-.buttons {color: rgb(255, 255, 255);  background-color: #23CED9;}
-.page-link {color:#ffffff; text-decoration: none; mix-blend-mode: normal}
+.buttons { color: white; font-size: 4rem; animation: Gradient 5s ease-out infinite; 
+     
+}
+@keyframes Gradient{
+    0% {text-shadow: 0 0 10px rgb(0, 251, 255), 
+0 0 20px rgb(65, 252, 255), 
+0 0 40px rgb(65, 252, 255),
+0 0 80px rgb(172, 254, 255);}
+30% {text-shadow: 0 0 10px rgb(255, 72, 218), 
+0 0 20px rgb(255, 72, 218), 
+0 0 40px rgb(255, 72, 218),
+0 0 80px rgb(255, 72, 218);}
+100% {text-shadow: 0 0 10px rgb(0, 251, 255), 
+0 0 20px rgb(65, 252, 255), 
+0 0 40px rgb(65, 252, 255),
+0 0 80px rgb(172, 254, 255);}
+
+}
+.page-link {color:#ffffff; mix-blend-mode: normal; border: 2px solid; border-radius: 20px; border-color: #23CED9;}
 .idk {}
 #page {width: 1000px;height: 50px; border-color:#ffffff; border-collapse: collapse; margin-left: auto; margin-right: auto;}
-#page-td {padding-inline: 40px;}
-#tabulka {width: 1000px;height: 300px; margin-left: auto; margin-right: auto; }
+.no {text-decoration: none;}
+
 #heart {
     animation: pulseAnimate 1s ease-out infinite;
      position: absolute;
@@ -90,8 +107,8 @@ a {color: azure}
     -2px 2px 0 #000,
     2px 2px 0 #000;  
     ;
-    font-size: 45px;
-    line-height: 35px;
+    font-size: 50px;
+    line-height: 40px;
     text-align: center;
     letter-spacing: 0,5px;
     position: relative;
