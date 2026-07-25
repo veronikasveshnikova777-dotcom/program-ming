@@ -30,35 +30,26 @@
       /* Scaled row heights totaling 100%: Yellow, Green, Red-row-1, Red-row-2, Red-row-3, Red-row-4 */
       grid-template-rows: 10% 6% 15% 47% 7% 15%;
       gap: 0px;
-      background-color:;
-      border: 3px solid #000000;
       width: 100vw;
       height: 63vw;
       max-width: 100%;
       max-height: 800px;
     }
 
-    .grid-cell {
-      background-color:
-    }
+    
 
     /* Colors defined by the reference diagram */
-    .color-yellow {
-      background-color: ;
-    }
+    
     .color-pink {
       background-color: rgb(255, 52, 167);
        mix-blend-mode: screen;
     inset: 0;
   z-index: -1;
   opacity: 0.5;
+      
     }
-    .color-red {
-      background-color:
-    }
-    .color-blue {
-      background-color: ;
-    }
+    
+    
 
     /* Row 1 (Yellow) */
     .cell-1-yellow {
@@ -71,6 +62,16 @@
       grid-column: 1 / 2;
       grid-row: 2 / 3;
      
+    }
+    .cell-2-green-left::after {
+      content:'skskskskskkskskssksksksks';
+      
+      
+    background-color: rgb(255, 52, 167);
+       mix-blend-mode: screen;
+    inset: 0;
+  z-index: -1;
+  opacity: 0.5;
     }
     .cell-2-green-mid {
       grid-column: 2 / 5;
@@ -87,15 +88,17 @@
     .cell-3-red-left {
       grid-column: 1 / 2;
       grid-row: 3 / 4;
-      
+      padding: 20px;
     }
     .cell-3-red-mid {
       grid-column: 2 / 4;
       grid-row: 3 / 4;
+      padding:10px
     }
     .cell-3-red-right {
       grid-column: 4 / 5;
       grid-row: 3 / 4;
+      padding: 20px
     }
     .cell-3-blue-sidebar {
       grid-column: 5 / 6;
@@ -138,7 +141,6 @@
       display: flex;
       flex-direction: column;
       gap: 3px;
-      background-color:;
       height: 100%;
     }
 
@@ -149,19 +151,22 @@
   </style>
 </head>
 <body>
-
+  
+  <a href="undertale.html" class="no">
+        <span class="page-link">
+                    
+                      Undertale Page 
+          
+        </span>
+      </a>
+      
   <div class="grid-container">
     <!-- Row 1 (Yellow) -->
     <div class="grid-cell cell-1-yellow color-yellow"></div>
 
     <!-- Row 2 (Green) -->
     <div class="grid-cell cell-2-green-left color-pink">
-      <a href="https://www.sosasou.cz/">
-        <span class="page-link">
-                     Undertale Page
-          
-        </span>
-      </a>
+      
     </div>
     <div class="grid-cell cell-2-green-mid color-pink"></div>
     <div class="grid-cell cell-2-green-right color-pink"></div>

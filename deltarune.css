@@ -3,7 +3,7 @@
     font-family: "Determination";
     src: url(DeterminationMonoWebRegular-Z5oq.ttf);}
 
-p { font-size: x-large}
+
 h1 {  color:#000000; font-weight: bolder; text-align: center; font-size: 60px; }
 h3 { color:#fafafa;font-size: 40px; font-weight: lighter; letter-spacing: 1px; text-align: center;
  text-shadow:
@@ -18,17 +18,12 @@ h3 { color:#fafafa;font-size: 40px; font-weight: lighter; letter-spacing: 1px; t
    mix-blend-mode: screen;
     inset: 0;
   z-index: -1;
-
-
     ;}
 
 
 
-img { display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: 300px; width: 450px;}
-#menu-td {margin: 0;padding: 20px;border-color:#23CED9}
-#menu-tr {background-color: #fe87f8ae; color:aliceblue}
-#menu {width: 100%;height: 40px; border-collapse: collapse;}
-#void {width: 100%;height: 50px; border-collapse: collapse;}
+
+
 
 
 body {
@@ -39,11 +34,10 @@ body {
     height: 100vh;
     margin: 0;
     font-family: "Determination";
-    ;
-}
+    }
 a {color: azure}
 
-.buttons { color: white; font-size: 4rem; animation: Gradient 5s ease-out infinite; 
+.buttons { color: white; font-size: 4rem; animation: Gradient 5s ease-out infinite; margin-left: 20px;
      
 }
 @keyframes Gradient{
@@ -61,9 +55,22 @@ a {color: azure}
 0 0 80px rgb(172, 254, 255);}
 
 }
-.page-link {color:#ffffff; mix-blend-mode: normal; border: 2px solid; border-radius: 20px; border-color: #23CED9;}
-.idk {}
-#page {width: 1000px;height: 50px; border-color:#ffffff; border-collapse: collapse; margin-left: auto; margin-right: auto;}
+.page-link {color:#ffffff;
+     text-shadow:
+    -1px -1px 0 #3df5ff,
+    1px -1px 0 #3df5ff,
+    -1px 1px 0 #3df5ff,
+    1px 1px 0 #3df5ff; 
+    font-size: 30px; 
+     border: 3px solid; 
+     border-radius: 30px;
+     border-color: #37ffee; 
+     position: absolute; 
+     margin-left: 60px; 
+     margin-top: -313px;
+    padding: 2px 15px;}
+
+
 .no {text-decoration: none;}
 
 #heart {
@@ -94,7 +101,7 @@ a {color: azure}
     -3px 3px 0 #000,
     3px 3px 0 #000; 
     
-    font-size: 90px;
+    font-size: 100px;
     letter-spacing: -1px;
     font-weight: lighter;
 
@@ -121,7 +128,7 @@ a {color: azure}
      position: absolute;
      margin: px;
      margin-left: px;
-     
+ 
   
 }
 
